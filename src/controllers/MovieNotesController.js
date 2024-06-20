@@ -4,7 +4,7 @@ const AppError = require("../utils/AppError");
 class MovieNotesController {
   async create(request, response) {
     const { title, description, rating, movieTags } = request.body;
-    const { user_id } = request.params;
+    const user_id = request.user.id;
 
     const checkRatingMovie = rating >= 1 && rating <= 5;
 
@@ -57,7 +57,9 @@ class MovieNotesController {
   }
 
   async index(request, response) {
-    const { user_id, title, movieTags } = request.query;
+    const { title, movieTags } = request.query;
+
+    const user_id = request.user.id;
 
     let movieNotes;
 
